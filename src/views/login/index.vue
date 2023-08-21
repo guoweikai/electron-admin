@@ -103,7 +103,7 @@ const loginFunc = () => {
   loginReq(subForm)
     .then(({ data }) => {
       elMessage('登录成功')
-      basicStore.setToken(data?.jwtToken)
+      basicStore.setToken(data?.auth_code)
       router.push('/')
     })
     .catch((err) => {

@@ -1,5 +1,6 @@
 //获取用户信息
 import axiosReq from 'axios'
+import config from './config'
 // export const userInfoReq = (): Promise<any> => {
 //   return new Promise((resolve) => {
 //     const reqConfig = {
@@ -12,12 +13,13 @@ import axiosReq from 'axios'
 //     })
 //   })
 // }
-
+const { baseUrl } = config
 //登录
 export const loginReq = (subForm) => {
+  subForm.user_type = 3
   return axiosReq({
-    url: '/mock/login',
-    params: subForm,
+    url: `${baseUrl}/api/v1/login`,
+    data: subForm,
     method: 'post'
   })
 }
