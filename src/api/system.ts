@@ -16,7 +16,6 @@ import config from './config'
 const { baseUrl } = config
 //登录
 export const loginReq = (subForm) => {
-  subForm.user_type = 3
   return axiosReq({
     url: `${baseUrl}/api/v1/login`,
     data: subForm,

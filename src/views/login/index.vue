@@ -4,12 +4,12 @@
       <div class="title-container">
         <h3 class="title text-center">{{ settings.title }}</h3>
       </div>
-      <el-form-item prop="keyword" :rules="formRules.isNotNull('usename不能为空')">
+      <el-form-item prop="username" :rules="formRules.isNotNull('usename不能为空')">
         <div class="rowSC">
           <span class="svg-container">
             <svg-icon icon-class="user" />
           </span>
-          <el-input v-model="subForm.keyword" placeholder="用户名(admin)" />
+          <el-input v-model="subForm.username" placeholder="用户名(admin)" />
           <!--占位-->
           <div class="show-pwd" />
         </div>
@@ -26,7 +26,6 @@
             v-model="subForm.password"
             :type="passwordType"
             name="password"
-            placeholder="password(123456)"
             @keyup.enter="handleLogin"
           />
           <span class="show-pwd" @click="showPwd">
@@ -55,12 +54,12 @@ const { settings } = useBasicStore()
 const formRules = useElement().formRules
 //form
 const subForm = reactive({
-  keyword: 'panda',
-  password: '123456'
+  username: '',
+  password: ''
 })
-const state:any = reactive({
+const state: any = reactive({
   otherQuery: {},
-  redirect: ""
+  redirect: ''
 })
 const route = useRoute()
 const getOtherQuery = (query) => {
@@ -103,8 +102,10 @@ const loginFunc = () => {
   loginReq(subForm)
     .then(({ data }) => {
       elMessage('登录成功')
-      basicStore.setToken(data?.auth_code)
-      router.push('/')
+      console.log(data)
+      basicStore.setToken('111111')
+      localStorage.setItem('packages', JSON.stringify(data?.data?.packages))
+      router.push({ path: '/kami' })
     })
     .catch((err) => {
       tipMessage.value = err?.msg
@@ -117,7 +118,7 @@ const loginFunc = () => {
  *  password show or hidden
  * */
 const passwordType = ref('password')
-const refPassword:any = ref(null)
+const refPassword: any = ref(null)
 const showPwd = () => {
   if (passwordType.value === 'password') {
     passwordType.value = ''
