@@ -15,7 +15,7 @@
         </el-select>
       </el-form-item>
       <el-form-item label="天数" prop="days">
-        <el-input v-model="form.days"></el-input>
+        <el-input v-model="form.days" disabled></el-input>
       </el-form-item>
       <el-form-item>
         <el-button @click="close">取 消</el-button>
