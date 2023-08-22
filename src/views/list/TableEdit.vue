@@ -80,8 +80,8 @@ export default {
             // const { message } = await editMachine(this.form)
           }
           this.packages.forEach((item) => {
-            if (item.package_id == this.form.package_id) {
-              this.form.package_name = item.package_name
+            if (item.package_name == this.form.package_name) {
+              this.form.package_id = item.package_id
             }
           })
           await addKaimi(this.form)
