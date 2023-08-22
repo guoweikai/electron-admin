@@ -44,7 +44,7 @@
       </el-table-column>
       <el-table-column show-overflow-tooltip label="操作" width="180px">
         <template #default="{ row }">
-          <el-button @click="unbind(row)" >{{row.device_id? '解绑':'---' }}</el-button>
+          <el-button @click="unbind(row)">{{ row.device_id ? '解绑' : '---' }}</el-button>
           <!-- <el-button type="text" @click="handleDelete(row)">删除</el-button> -->
         </template>
       </el-table-column>
@@ -110,13 +110,12 @@ export default {
         })
       }
     },
-    handleKeyUp() {
+    async handleKeyUp() {
+      await this.fetchData()
       if (this.searchUserId) {
         this.tableData = this.tableData.filter((item) => item.user_id.includes(this.searchUserId))
       } else if (this.searchKami) {
         this.tableData = this.tableData.filter((item) => item.auth_code.includes(this.searchKami))
-      } else {
-        this.fetchData()
       }
     },
 
