@@ -2,10 +2,12 @@
   <div class="kami">
     <vab-query-form>
       <vab-query-form-left-panel>
-        <div class="header">
-          <el-button icon="el-icon-plus" type="primary" @click="handleAdd">添加</el-button>
-          <el-input placeholder="请输入用户标识进行筛选" @keyup="handleKeyUp" v-model="searchUserId" />
-          <el-input placeholder="请输入卡密进行筛选" @keyup="handleKeyUp" v-model="searchKami" />
+        <div class="header-contanier">
+          <div class="header">
+            <el-button icon="el-icon-plus" type="primary" @click="handleAdd">添加</el-button>
+            <el-input placeholder="请输入用户标识进行筛选" @keyup="handleKeyUp" v-model="searchUserId" />
+            <el-input placeholder="请输入卡密进行筛选" @keyup="handleKeyUp" v-model="searchKami" />
+          </div>
         </div>
       </vab-query-form-left-panel>
     </vab-query-form>
@@ -69,6 +71,7 @@ import TableEdit from './/TableEdit.vue'
 import { kamiList, unbindAuthCode } from '@/api/kami.ts'
 import QrcodeVue from 'qrcode.vue'
 import { ElMessage } from 'element-plus'
+import { Refresh, Search } from '@element-plus/icons-vue'
 
 export default {
   data() {
@@ -149,6 +152,7 @@ export default {
 .kami {
   height: 100vh;
   overflow: auto;
+
   .header {
     margin-top: 10px;
     display: flex;

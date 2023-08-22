@@ -34,7 +34,12 @@ const createWindow = () => {
     mainWindow.loadFile('dist/index.html')
   }
   //开启remote
-  require('@electron/remote/main').initialize()
+  try {
+    require('@electron/remote/main').initialize()
+  } catch (error) {
+    console.log(error)
+  }
+
   require('@electron/remote/main').enable(mainWindow.webContents)
   //引入相应的主线程
   require('./electron/main/MainRendererComm')

@@ -14,21 +14,15 @@
     <!--导航标题-->
     <div v-if="settings.showNavbarTitle" class="heardCenterTitle">{{ settings.title }}</div>
     <!-- 下拉操作菜单 -->
+
     <div v-if="settings.ShowDropDown" class="right-menu rowSC">
+      <el-button :icon="Refresh" @click="refreshPage" type="text">刷新</el-button>
       <el-dropdown trigger="click" size="medium">
         <div class="avatar-wrapper">
-          <img src="https://github.jzfai.top/file/images/nav-right-logo.gif" class="user-avatar" />
-          <CaretBottom style="width: 1em; height: 1em; margin-left: 4px" />
+          <img src="https://github.jzfai.top/file/images/nav-right-logo.gif" class="user-avatar"  style="width:30px;height: 30px;margin-top:-8px" />
         </div>
         <template #dropdown>
           <el-dropdown-menu>
-            <router-link to="/">
-              <el-dropdown-item>{{ langTitle('Home') }}</el-dropdown-item>
-            </router-link>
-            <a target="_blank" href="https://github.com/jzfai/vue3-admin-ts">
-              <el-dropdown-item>{{ langTitle('Github') }}</el-dropdown-item>
-            </a>
-            <!--<el-dropdown-item>修改密码</el-dropdown-item>-->
             <el-dropdown-item divided @click="loginOut">{{ langTitle('login out') }}</el-dropdown-item>
           </el-dropdown-menu>
         </template>
@@ -38,6 +32,7 @@
 </template>
 
 <script setup lang="ts">
+import { Refresh, Search } from '@element-plus/icons-vue'
 import { nextTick } from 'vue'
 import { CaretBottom } from '@element-plus/icons-vue'
 import { useRouter } from 'vue-router'
@@ -47,7 +42,7 @@ import { resetState } from '@/hooks/use-permission'
 import { elMessage } from '@/hooks/use-element'
 import { useBasicStore } from '@/store/basic'
 import { langTitle } from '@/hooks/use-common'
-import {loginOutReq} from "@/api/system";
+import { loginOutReq } from '@/api/system'
 
 const basicStore = useBasicStore()
 const { settings, sidebar, setToggleSideBar } = basicStore
@@ -57,13 +52,16 @@ const toggleSideBar = () => {
 //退出登录
 const router = useRouter()
 const loginOut = () => {
-  loginOutReq().then(()=>{
+  loginOutReq().then(() => {
     elMessage('退出登录成功')
     router.push(`/login?redirect=/`)
     nextTick(() => {
       resetState()
     })
   })
+}
+const refreshPage = () => {
+  location.reload()
 }
 </script>
 

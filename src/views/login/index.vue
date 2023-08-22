@@ -46,6 +46,8 @@ import { onMounted, reactive, ref, watch } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { useBasicStore } from '@/store/basic'
 import { elMessage, useElement } from '@/hooks/use-element'
+import { ElMessage } from 'element-plus'
+
 import { loginReq } from '@/api/system'
 
 /* listen router change and set the query  */
@@ -101,11 +103,19 @@ const basicStore = useBasicStore()
 const loginFunc = () => {
   loginReq(subForm)
     .then(({ data }) => {
-      elMessage('登录成功')
       console.log(data)
-      basicStore.setToken('111111')
-      localStorage.setItem('packages', JSON.stringify(data?.data?.packages))
-      router.push({ path: '/kami' })
+      if (data.code == 200) {
+        elMessage('登录成功')
+        basicStore.setToken('111111')
+        localStorage.setItem('packages', JSON.stringify(data?.data?.packages))
+        router.push({ path: '/kami' })
+      } else {
+        ElMessage({
+          message: '登录失败,请验证账号和密码',
+          grouping: true,
+          type: 'error'
+        })
+      }
     })
     .catch((err) => {
       tipMessage.value = err?.msg
