@@ -1,8 +1,8 @@
 {
   "name": "kaka",
-  "version": "2.0.5",
+  "version": "1.0.0",
   "license": "ISC",
-  "author": "kuanghua(869653722@qq.com)",
+  "author": "gwk",
   "scripts": {
     "dev": "vite --mode serve-dev --host",
     "serve": "vite preview --mode build",
@@ -18,7 +18,7 @@
   },
   "main": "electron-main.ts",
   "build": {
-    "productName": "vue3-admin-electron",
+    "productName": "authcode",
     "appId": "top.kuanghua.electron",
     "asar": false,
     "afterPack": "./build/afterPack.js",
