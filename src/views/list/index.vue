@@ -44,6 +44,12 @@
           {{ row.packages[0].package_name }}
         </template>
       </el-table-column>
+      <el-table-column prop="packages" label="流信息" width="150" show-overflow-tooltip>
+        <template #default="{ row }">
+          <div>{{ row.rand_code }}</div>
+          <div>{{ row.pull_url }}</div>
+        </template>
+      </el-table-column>
       <el-table-column show-overflow-tooltip label="操作" width="180px">
         <template #default="{ row }">
           <el-button @click="unbind(row)">{{ row.device_id ? '解绑' : '---' }}</el-button>
